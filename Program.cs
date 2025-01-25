@@ -39,8 +39,17 @@ class Program
                     {
                         Console.WriteLine("Podaj swoje ID użytkownika:");
                         int id = Convert.ToInt32(Console.ReadLine());
-                        Osoba uzytkownik = new Osoba(id);
-                        uzytkownik.ObslugaKlienta(); 
+                        if (id > managerBazy.Licznik("select count(*) from uzytkownik"))
+                        {
+                            Console.WriteLine("Nie ma takiego id");
+                            klientMenu = false;
+                        }
+                        else
+                        {
+                            Osoba uzytkownik = new Osoba(id);
+                            uzytkownik.ObslugaKlienta();
+                        }
+ 
                     }
                     else if (klientWybor == "2")
                     {
@@ -78,7 +87,15 @@ class Program
                             if (kurierWybor == "1")
                             {
                                 Pracownik kurier = new Pracownik();
-                                kurier.ObslugaKuriera();
+                                if (kurier.idPracownika > managerBazy.Licznik("select count(*) from uzytkownik"))
+                                {
+                                    Console.WriteLine("Nie ma takiego id");
+                                    kurierMenu = false;
+                                }
+                                else
+                                {
+                                    kurier.ObslugaKuriera();
+                                }
                             }
                             else if (kurierWybor == "2")
                             {

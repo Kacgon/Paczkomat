@@ -82,6 +82,11 @@ public class DBmanager
         Console.WriteLine("Podaj dane najlepszego pracownika miesiąca");
         Console.WriteLine("Id:");
         int id = Convert.ToInt32(Console.ReadLine());
+        if (id > Licznik("select count(*) from kurier"))
+        {
+            throw new ArgumentException("Nie ma takiego Id.");
+        }
+
         Console.WriteLine("Imie:");
         string imie = Console.ReadLine();
         Console.WriteLine("Nazwisko:");
